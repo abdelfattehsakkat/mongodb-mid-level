@@ -129,22 +129,64 @@ db.users.createIndex({ name: 1 });
 db.users.dropIndex("name_1");
 ```
 
-**Exercices pratiques**
 
-💻 **Exercice 1 : Installation et Connexion**
+## 💻 Lab 1 : Premiers Pas avec MongoDB (1h)
 
--   Installer MongoDB et MongoDB Compass.
--   Créer une base de données et une collection.
+### 1. Installation et Configuration
 
-💻 **Exercice 2 : Manipulation CRUD**
+-   Installer MongoDB Server et MongoDB Compass.
+    
+-   Vérifier l’installation avec `mongod --version` et `mongo --version`.
+    
+-   Se connecter à la base avec MongoDB Compass et créer une première base de données.
+    
 
--   Insérer 5 documents.
--   Lire tous les documents.
--   Trouver un document avec un filtre.
--   Mettre à jour un document.
--   Supprimer un document.
+### 2. Manipulation des documents avec MongoDB Shell
 
-💻 **Exercice 3 : Indexation**
+-   Créer une collection `users`.
+    
+-   Insérer plusieurs documents avec différentes structures.
+    
+-   Tester des requêtes `find()` avec filtres et projections.
+    
 
--   Créer un index sur un champ.
--   Observer les performances avec et sans index
+### 3. Import et Export de données JSON
+
+-   Créer un fichier `users.json` contenant une liste d’utilisateurs.
+    
+-   Importer ces données avec la commande MongoDB `mongoimport`.
+    
+-   Exporter les données en JSON avec `mongoexport`.
+    
+
+### 4. Exercices CRUD sur une base de test
+
+#### Objectif : Appliquer les opérations CRUD dans un scénario réel.
+
+1.  **Insertion** : Ajouter 10 utilisateurs avec des données variées (nom, âge, email, ville, téléphone).
+    
+2.  **Lecture** :
+    
+    -   Récupérer tous les utilisateurs.
+        
+    -   Trouver ceux qui ont plus de 25 ans.
+        
+    -   Sélectionner uniquement les noms et emails.
+        
+3.  **Mise à jour** :
+    
+    -   Augmenter de 2 ans l’âge de tous les utilisateurs de plus de 30 ans.
+        
+    -   Ajouter un champ `status: "active"` aux utilisateurs qui n'en ont pas.
+        
+4.  **Suppression** :
+    
+    -   Supprimer un utilisateur spécifique.
+        
+    -   Supprimer tous les utilisateurs qui n’ont pas d’email.
+        
+5.  **Indexation** :
+    
+    -   Créer un index sur le champ `email`.
+        
+    -   Vérifier l’impact sur les performances avec `explain()`.
