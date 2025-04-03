@@ -14,41 +14,13 @@ MongoDB est une base de données NoSQL orientée documents, offrant une grande f
 
 **Différences avec les bases SQL**
 
-**Caractéristique**
-
-**SQL (ex: MySQL, PostgreSQL)**
-
-**MongoDB**
-
-Structure
-
-Tables, lignes, colonnes
-
-Collections, documents
-
-Schéma
-
-Fixe (défini à l'avance)
-
-Flexible
-
-Langage de requêtes
-
-SQL
-
-API JSON-like
-
-Transactions
-
-ACID (fortes garanties)
-
-ACID pour les transactions multi-documents
-
-Scalabilité
-
-Verticale (augmentation des ressources serveur)
-
-Horizontale (sharding)
+|**Caractéristique**| **SQL (ex: MySQL, PostgreSQL)**|**MongoDB**|
+|  --------  |  -------  |  --------  | 
+|Structure| Tables, lignes, colonnes| Collections, documents|
+| Schéma|Fixe (défini à l'avance)| Flexible| 
+| Langage de requêtes| SQL| API JSON-like|
+| Transactions| ACID (fortes garanties)| ACID pour les transactions multi-documents| 
+| Scalabilité| Verticale (augmentation des ressources serveur)| Horizontale (sharding)| 
 
 **2. Architecture et composants clés**
 
@@ -72,10 +44,15 @@ Horizontale (sharding)
 
 **Insérer un document unique**
 
+```js
 db.users.insertOne({ name: "Alice", age: 30, email: "alice@example.com" });
+
+```
+
 
 **Insérer plusieurs documents**
 
+```js
 db.users.insertMany([
 
 { name: "Bob", age: 25 },
@@ -83,40 +60,56 @@ db.users.insertMany([
 { name: "Charlie", age: 35 }
 
 ]);
+```
+
 
 **b) Read (Lecture des données)**
 
 **Trouver tous les documents**
 
-db.users.find();
+```js
 
+db.users.find();
+```
 **Filtrage**
 
+```js
 db.users.find({ age: { $gte: 30 } });
+```
 
 **Projection (sélectionner uniquement certains champs)**
 
+```js
 db.users.find({}, { name: 1, _id: 0 });
+```
 
 **c) Update (Mise à jour de documents)**
 
 **Mettre à jour un document unique**
 
+```js
 db.users.updateOne({ name: "Alice" }, { $set: { age: 31 } });
+```
 
 **Mettre à jour plusieurs documents**
 
+```js
 db.users.updateMany({ age: { $lt: 30 } }, { $inc: { age: 1 } });
+```
 
 **d) Delete (Suppression de documents)**
 
 **Supprimer un document**
 
+```js
 db.users.deleteOne({ name: "Alice" });
+```
 
 **Supprimer plusieurs documents**
 
+```js
 db.users.deleteMany({ age: { $gt: 35 } });
+```
 
 **4. Indexation de base**
 
@@ -126,11 +119,15 @@ Les index améliorent les performances des requêtes en évitant les scans compl
 
 **Création d’un index simple**
 
+```js
 db.users.createIndex({ name: 1 });
+```
 
 **Suppression d’un index**
 
+```js
 db.users.dropIndex("name_1");
+```
 
 **Exercices pratiques**
 
