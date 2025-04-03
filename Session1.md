@@ -3,15 +3,58 @@
 
 **1. Présentation de MongoDB**
 
-**Pourquoi MongoDB ?**
+
+## 1. Présentation de MongoDB
+
+### Pourquoi MongoDB ?
 
 MongoDB est une base de données NoSQL orientée documents, offrant une grande flexibilité et une scalabilité horizontale.
 
--   **Schema-less** : Contrairement aux bases SQL, MongoDB n'impose pas de structure fixe.
--   **JSON-like** : Utilise BSON (Binary JSON) pour stocker les données.
--   **Scalabilité** : Gestion facile du sharding pour répartir la charge.
--   **Haute disponibilité** : Grâce aux Replica Sets.
+#### Caractéristiques principales de MongoDB
 
+##### 1. **Schema-less**
+
+Contrairement aux bases SQL qui nécessitent une structure rigide avec des tables et des colonnes définies à l'avance, MongoDB permet de stocker des documents sans schéma prédéfini. Cela signifie que :
+
+-   Les documents d'une même collection peuvent avoir des champs différents.
+    
+-   Il est facile d'ajouter ou de supprimer des champs sans migration complexe.
+    
+-   Cette flexibilité est particulièrement utile pour les applications en évolution rapide.
+    
+
+##### 2. **JSON-like et BSON**
+
+MongoDB stocke les données sous forme de documents **BSON (Binary JSON)**, un format binaire optimisé basé sur JSON, qui offre plusieurs avantages :
+
+-   **Facilité de manipulation** : BSON est proche du JSON, couramment utilisé dans les applications web modernes.
+    
+-   **Types de données enrichis** : BSON prend en charge des types supplémentaires comme les dates et les objets imbriqués.
+    
+-   **Performance** : Format binaire optimisé pour la lecture et l'écriture rapide.
+    
+
+##### 3. **Scalabilité**
+
+MongoDB supporte la **scalabilité horizontale** grâce au **sharding**, qui permet de répartir les données sur plusieurs serveurs. Avantages :
+
+-   **Gestion efficace des grandes quantités de données** : En divisant les collections en fragments (shards) stockés sur différents nœuds.
+    
+-   **Équilibrage de charge** : Chaque serveur ne gère qu'une fraction des requêtes, améliorant la rapidité d'accès.
+    
+-   **Répartition automatique** : MongoDB distribue les données en fonction d'une clé de sharding.
+    
+
+##### 4. **Haute disponibilité avec Replica Sets**
+
+MongoDB garantit une disponibilité continue des données grâce aux **Replica Sets**, qui sont des ensembles de nœuds répliquant les données en temps réel :
+
+-   **Failover automatique** : Si le serveur principal (primary) tombe, un secondaire (secondary) prend automatiquement le relais.
+    
+-   **Lecture évolutive** : Possibilité de lire depuis les serveurs secondaires pour alléger la charge sur le serveur principal.
+    
+-   **Sécurité des données** : Chaque réplique contient une copie complète des données, réduisant le risque de perte.
+-   
 **Différences avec les bases SQL**
 
 |**Caractéristique**| **SQL (ex: MySQL, PostgreSQL)**|**MongoDB**|
