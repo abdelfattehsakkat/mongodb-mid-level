@@ -165,14 +165,68 @@ Vous travaillez sur une base de données e-commerce avec deux collections :
 ```
 
 ### ✅ Étapes
-
+#### Etape 1
 1. **Créer les collections `products` et `orders`** avec quelques documents.
 2. **Écrire des requêtes d’agrégation** pour :
    - Total des ventes par produit (`$unwind`, `$group`)
    - Panier moyen par client
    - Commandes par mois (`$group` + `$dateToString`)
 3. **Utiliser `$lookup`** pour enrichir les commandes avec les détails des produits.
-4. **Construire une vue consolidée** : commande + produits + montant total par ligne.
+4. **Construire une vue consolidée** : commande + produits + montant total par ligne dans un seul document enrichi, incluant :
+   - La commande : son identifiant, date, client, etc.
+   - Les produits de cette commande : nom, prix, etc., récupérés via $lookup (puis $unwind si nécessaire).
+   - Le montant total par ligne d’achat : prix * quantité pour chaque produit acheté.
+
+📦 Exemple d’objectif :
+Prenons une commande comme celle-ci :
+
+```json
+{
+  "_id": ObjectId("..."),
+  "customer": "Alice",
+  "items": [
+    { "productId": ObjectId("p1"), "quantity": 2 },
+    { "productId": ObjectId("p2"), "quantity": 1 }
+  ]
+}
+```
+Et deux produits :
+
+```json
+{ "_id": ObjectId("p1"), "name": "Laptop", "price": 1000 }
+{ "_id": ObjectId("p2"), "name": "Mouse", "price": 50 }
+```
+La sortie doit ressembler à ce document :
+
+```json
+{
+  "_id": ObjectId("..."),
+  "customer": "Alice",
+  "items": [
+    {
+      "productId": ObjectId("p1"),
+      "productName": "Laptop",
+      "price": 1000,
+      "quantity": 2,
+      "lineTotal": 2000
+    },
+    {
+      "productId": ObjectId("p2"),
+      "productName": "Mouse",
+      "price": 50,
+      "quantity": 1,
+      "lineTotal": 50
+    }
+  ],
+  "totalOrderAmount": 2050
+}
+```
+#### 🔧 Hints
+ - $unwind sur items
+ - $lookup vers products en utilisant items.productId
+ - $addFields pour calculer lineTotal
+ - $group pour regrouper les lignes et reconstituer la commande avec items enrichis
+ - $addFields pour calculer totalOrderAmount (optionnel)
 
 ### 🌟 Bonus
 Créer une version avec documents imbriqués, comparer avec la version référencée :
