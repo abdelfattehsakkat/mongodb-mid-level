@@ -113,7 +113,8 @@ Principaux stages :
 | `$project`| Sélectionner / transformer les champs                                |
 | `$group`  | Grouper les documents par une clé, appliquer des opérations (somme…) |
 | `$sort`   | Trier les documents                                                   |
-| `$limit` / `$skip` | Pagination                                                   |
+| `$limit`  |                                                                       |
+|`$skip`    | Pagination                                                            |
 
 #### Exemple de pipeline
 ```js
@@ -129,6 +130,17 @@ MongoDB permet des opérations complexes :
 - `$sum`, `$avg`, `$min`, `$max`
 - `$concat`, `$toUpper`, `$dateToString`
 - `$cond`, `$ifNull`, `$switch`
+
+### ⚡️ Pourquoi préférer les requêtes complexes côté MongoDB ?
+
+Plutôt que de transférer de grandes quantités de données vers l’application pour les filtrer, transformer ou agréger en JavaScript, il est bien plus performant et scalable d’exécuter ces opérations directement côté MongoDB. Cela permet :
+
+- Une réduction significative du volume de données transférées sur le réseau.
+- Une centralisation de la logique métier d’analyse (calculs, statistiques) dans la base de données.
+- Une meilleure utilisation des ressources MongoDB, notamment via les index et l’optimisation native du moteur d’agrégation.
+- Un code backend plus simple, car les résultats sont déjà transformés et prêts à être affichés ou utilisés.
+
+**Exemple** : inutile de ramener toutes les commandes pour calculer le chiffre d’affaires mensuel côté backend. Un ``$group`` avec ``$dateToString`` fera le travail directement dans la base.
 
 ---
 
